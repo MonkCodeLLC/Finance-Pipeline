@@ -16,7 +16,7 @@ def lambda_handler(event, context):
         
         return {
         'statusCode': 200,
-        'body': json.dumps('File transfer Failed')
+        'body': json.dumps('File transfer Successful')
         }
     
     except Exception as err:

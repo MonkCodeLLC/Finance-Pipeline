@@ -18,20 +18,17 @@ def transfer(data, path, bucket):
     data = data_cleaning(data)
 
     if data == 'Failed':
-        print("Data cleaning failed")
-        return False
+        raise Exception("Data cleaning failed")
 
     INDTimeStamp = dt.datetime.now(dt.timezone(dt.timedelta(hours=5, minutes=30))).strftime("%Y%m%d")
     stock = eval(data)['Meta Data']['Symbol']
  
-    # with open(os.path.join(path,"Timeseries_{}_{}.json".format(stock,INDTimeStamp)), "w") as f:
-    #     f.write(data)
     S3_connect = boto3.client('s3')
     try:
         S3_connect.put_object(Body=data, Bucket=bucket, Key="{}/{}/Timeseries_{}_{}.json".format(stock,INDTimeStamp, stock, INDTimeStamp))
-        return '''"Timeseries_{}_{}.json".format(stock,INDTimeStamp) transfer successful'''
+        return True
     except:
-        return '''"Timeseries_{}_{}.json".format(stock,INDTimeStamp) transfer failed'''
+        raise  Exception("File transfer Failed")
     
 
 
