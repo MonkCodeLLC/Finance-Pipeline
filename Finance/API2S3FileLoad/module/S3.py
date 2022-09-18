@@ -28,7 +28,7 @@ def transfer(data, path, bucket):
     #     f.write(data)
     S3_connect = boto3.client('s3')
     try:
-        S3_connect.put_object(Body=data, Bucket=bucket, Key="Timeseries_{}_{}.json".format(stock,INDTimeStamp))
+        S3_connect.put_object(Body=data, Bucket=bucket, Key="{}/{}/Timeseries_{}_{}.json".format(stock,INDTimeStamp, stock, INDTimeStamp))
         return '''"Timeseries_{}_{}.json".format(stock,INDTimeStamp) transfer successful'''
     except:
         return '''"Timeseries_{}_{}.json".format(stock,INDTimeStamp) transfer failed'''
