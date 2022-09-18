@@ -1,16 +1,18 @@
-import json
-from module import api
-from module import fileCreation
-import os
-
-# first test
+import json, os
+from module import api, S3
 
 def lambda_handler(event, context):
-    
+
     try:
         data = api.get_data("MSFT")
         path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data/")
-        #fileCreation.create_json(data, path)
+
+        bucket = None
+        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "config/bucket.json"), "r") as f:
+            config = json.load(f)
+            bucket = config["bucket"]
+
+        S3.transfer(data, path, bucket)
         
         return {
         'statusCode': 200,
