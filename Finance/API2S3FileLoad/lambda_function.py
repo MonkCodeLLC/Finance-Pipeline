@@ -4,6 +4,19 @@ from module import api, S3
 def lambda_handler(event, context):
 
     try:
+        top_stock = {
+                        'Apple':'AAPL',
+                        'Microsoft':'MSFT',
+                        'Google':'GOOG',
+                        'Amazon':'AMZN',
+                        'Tesla':'TSLA',
+                        '':'BRK-A',
+                        '':'UNH',
+                        '':'JNJ',
+                        '':'V',
+                        '':'META'
+                    }
+
         data = api.get_data("MSFT")
         path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data/")
 
