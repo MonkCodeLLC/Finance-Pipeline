@@ -15,7 +15,7 @@ def data_cleaning(data, top_stock):
     return dataCleaned if dataCleaned else 'Failed'
 
 
-def transfer(data, path, bucket, top_stock):
+def transfer(data, bucket, top_stock):
 
     data = data_cleaning(data, top_stock)
 
